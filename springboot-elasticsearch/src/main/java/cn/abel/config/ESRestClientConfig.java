@@ -13,11 +13,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 第一数据源
  * @author yangyibo
  * @time 2019/4/2
  */
 @Configuration
 public class ESRestClientConfig {
+    public static final String NAME = "ESRestClientConfig";
+
     @Value("${elasticsearch.userName}")
     private String userName;
     @Value("${elasticsearch.password}")
@@ -27,7 +30,7 @@ public class ESRestClientConfig {
     @Value("${elasticsearch.rest.port}")
     private Integer port;
 
-    @Bean(destroyMethod = "close")
+    @Bean(name = NAME, destroyMethod = "close")
     public RestClient getRestClient() {
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,
